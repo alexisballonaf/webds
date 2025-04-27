@@ -1,0 +1,238 @@
+/*────────────────────────────────────────
+Fuentes
+────────────────────────────────────────*/
+@font-face {
+    font-family: 'Sofia';
+    src: url("sofia-pro/Sofia Pro Regular Az.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Sofia';
+    src: url("sofia-pro/Sofia Pro Light Az.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+/*────────────────────────────────────────
+    Reset y reglas globales
+────────────────────────────────────────*/
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+}
+body,
+input,
+textarea,
+button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Sofia', sans-serif;
+}
+
+/*────────────────────────────────────────
+Variables CSS
+────────────────────────────────────────*/
+:root {
+    --spacing-unit: 1rem;
+    --logo-min-width: 20px;
+    --logo-max-width: 170px;
+}
+body{
+    background-color: #e0dfd6;
+}
+/*────────────────────────────────────────
+Contenedor Principal
+────────────────────────────────────────*/
+.container {
+    /* Inicialmente transparente */
+    background-color: transparent;
+    width: 100%;
+    max-width: 100%;
+    margin: -10px 0 10px 0;
+    padding: var(--spacing-unit) calc(2% + 0.75rem);
+    box-sizing: border-box;
+
+
+
+    /* Preparar para aplicar backdrop-filter */
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+  /* Al hacer scroll: fondo semitransparente y blur */
+.container.scrolled {
+    background-color: rgba(255, 255, 255, 0.3);   /* Ajusta la opacidad al gusto */
+    backdrop-filter: blur(10px);                   /* Fuerza el desenfoque */
+    -webkit-backdrop-filter: blur(10px);           /* Compatibilidad Safari */
+}
+
+/*────────────────────────────────────────
+Hero y Header
+────────────────────────────────────────*/
+.hero {
+width: 100%;
+margin: 0;
+}
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-unit);
+    width: 100%;
+    position: relative;
+}
+
+/*────────────────────────────────────────
+Logo e Ícono de Usuario
+────────────────────────────────────────*/
+.logo img {
+    width: clamp(var(--logo-min-width), 30vw, var(--logo-max-width));
+    height: auto;
+    margin: 0;
+    transition: transform 0.3s ease;
+}
+.user-icon img {
+    width: clamp(15px, 7.5vw, 38px);
+    aspect-ratio: 1;
+    object-fit: contain;
+    margin: 0; /* Se mantienen tus márgenes negativos según media queries */
+    transition: transform 0.3s ease;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 80%;
+    right: 8%;
+    width: 90%;
+    max-width: 250px;
+    background-color: rgba(255, 255, 255, 0.3);  /* Fondo semitransparente */
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 25px;
+    overflow: hidden;
+    z-index: 1000;
+    padding: 1rem;
+    transform: translateY(10px);
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.3s ease-out, backdrop-filter 0.5s ease-out;
+    backdrop-filter: blur(10px);  /* Desenfoque del fondo detrás del menú */
+}
+
+.open-menu {
+    max-height: 400px;
+    opacity: 1;
+    backdrop-filter: blur(10px);  /* Mantener el desenfoque cuando el menú está abierto */
+}
+
+
+  /* Espaciado interno */
+  .dropdown-wrapper {
+    padding: 1rem;
+  }
+
+  /* Pequeño “offset” si quieres separarlo un poco más */
+  .dropdown-menu.offset {
+    transform: translateY(8px);
+  }
+
+  .user-info{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-info img{
+    border-radius: 30%;
+}
+.user-info h2{
+    font-size: 1.2em;
+
+}
+.dropdown-menu hr {
+    margin: 15px 0;
+    border: 0;
+    height: 1px;
+    background-color: #8913d8;
+}
+.menu-options{
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.menu-options div{
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.menu-options img{
+    width: 25px;
+}
+.menu-options p{
+    flex: 1;
+    margin-left: 15px;
+    font-size: 15px;
+}
+.menu-options span{
+    font-size: 20px;
+    color: white;
+}
+.open-menu{
+    max-height: 400px;
+}
+
+
+
+
+/*────────────────────────────────────────
+Media Queries
+────────────────────────────────────────*/
+/* Large Devices */
+@media (max-width: 1200px) {
+    .container {
+    padding: var(--spacing-unit) calc(4% + 0.75rem);
+    }
+    .logo img,
+    .user-icon img {
+    margin-left: -2%;
+    }
+}
+
+  /* Medium Devices */
+@media (max-width: 992px) {
+    .container {
+    padding: var(--spacing-unit) calc(3% + 0.2rem);
+    }
+    .header {
+      gap: calc(var(--spacing-unit) * 0.75);
+    }
+}
+
+  /* Small Devices */
+@media (max-width: 768px) {
+    .logo img,
+    .user-icon img {
+    margin: 0;
+    }
+}
+
+  /* Very Small Devices */
+@media (max-width: 576px) {
+    .header {
+    flex-direction: row;
+    text-align: center;
+    }
+    .logo img,
+    .user-icon img {
+    margin: 0;
+    }
+}
+
+  /* Ultra Small Devices */
+@media (max-width: 480px) {
+    :root {
+    --spacing-unit: 0.75rem;
+    }
+    .container {
+    padding: var(--spacing-unit) calc(2% + 0.25rem);
+    }
+}
