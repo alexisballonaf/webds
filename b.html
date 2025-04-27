@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Municipalidad Provincial de Ferreñafe - Registro Vehicular</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .header {
+            background-color: white;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .logo-text {
+            margin-left: 10px;
+            font-size: 14px;
+            line-height: 1.2;
+        }
+
+        .container {
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .client-summary {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .client-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+
+        .client-photo svg {
+            fill: white;
+            width: 60%;
+            height: 60%;
+        }
+
+        .client-info {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 15px;
+        }
+
+        .client-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .client-dni {
+            color: #666;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .qr-section {
+            width: 120px;
+            height: 120px;
+            margin-left: auto;
+        }
+
+        .qr-code {
+            width: 100%;
+            height: 100%;
+        }
+
+        .print-btn {
+            display: block;
+            background-color: #404863;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            border-right: 1px solid #eee;
+            padding: 10px;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 20px;
+            padding: 5px 15px;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .search-icon {
+            width: 25px;
+            height: 25px;
+            background-color: #b7fc5d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            padding: 8px 5px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .client-details, .vehicle-details {
+            width: 100%;
+        }
+
+        .details-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .section-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #b7fc5d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .section-value {
+            font-weight: bold;
+            margin-top: 3px;
+        }
+
+        .view-more {
+            display: block;
+            background-color: #404863;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .detail-item {
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .detail-value {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .info-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .info-block {
+            flex: 1;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .info-block-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .info-block-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #404863;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .info-block-icon svg {
+            fill: white;
+            width: 60%;
+            height: 60%;
+        }
+
+        .info-block-title {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .language-selector {
+            position: fixed;
+            left: 10px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .language-btn {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .details-section {
+                flex-direction: row;
+            }
+
+            .client-details, .vehicle-details {
+                width: 50%;
+            }
+
+            .info-blocks {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .info-block {
+                flex: 1 0 calc(50% - 10px);
+                min-width: 250px;
+            }
+
+            .language-selector {
+                left: 20px;
+                bottom: auto;
+                top: 50%;
+                transform: translateY(-50%);
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            .info-block {
+                flex: 1;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .client-summary {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .client-photo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .client-info {
+                margin-bottom: 20px;
+            }
+
+            .qr-section {
+                margin-left: 0;
+            }
+
+            .stat {
+                min-width: calc(50% - 10px);
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            .stat:nth-child(3), .stat:nth-child(4) {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/api/placeholder/60/60" alt="Municipalidad de Ferreñafe" class="logo">
+        <div class="logo-text">
+            <strong>MUNICIPALIDAD PROVINCIAL</strong><br>
+            FERREÑAFE
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Detalles del Cliente</h2>
+
+        <div class="client-summary">
+            <div class="client-photo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </div>
+            <div class="client-info">
+                <div class="client-name">Alexis Fabian Ballona Silva</div>
+                <div class="client-dni">DNI: 73525551</div>
+                <a href="#" class="print-btn">Imprimir</a>
+            </div>
+            <div class="qr-section">
+                <img src="/api/placeholder/120/120" alt="QR Code" class="qr-code">
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-label">Tipo de Persona</div>
+                <div class="stat-value">Natural</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Estado</div>
+                <div class="stat-value">Activo</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Vehículos Registrados</div>
+                <div class="stat-value">2</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Id</div>
+                <div class="stat-value">144</div>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <div class="search-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+            </div>
+            <input type="text" class="search-input" placeholder="Buscar Placa del Vehículo">
+        </div>
+
+        <div class="details-section">
+            <div class="client-details">
+                <div class="details-card">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="section-title">Información:</div>
+                            <div class="section-value">Cliente</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">DNI:</div>
+                        <div class="detail-value">A1A-000</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Teléfono:</div>
+                        <div class="detail-value">932342337</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Tipo:</div>
+                        <div class="detail-value">Persona Natural</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Dirección:</div>
+                        <div class="detail-value">San Martín</div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-label">Gmail:</div>
+                        <div class="detail-value">afball@gmail.com</div>
+                    </div>
+
+                    <a href="#" class="view-more">Ver Más</a>
+                </div>
+            </div>
+
+            <div class="vehicle-details">
+                <div class="details-card">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="section-title">Información:</div>
+                            <div class="section-value">Vehículo</div>
+                        </div>
+                    </div>
+
+                    <div class="info-blocks">
+                        <div class="info-block">
+                            <div class="info-block-header">
+                                <div class="info-block-icon">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-0.99-6.29l-2.7-2.7 1.4-1.4 1.3 1.29 3.29-3.29 1.4 1.4-4.69 4.7z"/>
+                                    </svg>
+                                </div>
+                                <div class="info-block-title">Características</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Marca:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Modelo:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Año:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Color:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Tipo:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Capacidad:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="info-block-header">
+                                <div class="info-block-icon">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                                    </svg>
+                                </div>
+                                <div class="info-block-title">Detalles</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">N° Placa:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">N° Motor:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">N° Chasis:</div>
+                                <div class="detail-value">A1A-000</div>
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="info-block-header">
+                                <div class="info-block-icon">
+                                    <svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1.4c0-2 4-3.1 6-3.1s6 1.1 6 3.1V19z"/>
+                                    </svg>
+                                </div>
+                                <div class="info-block-title">Información de Registro</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Fecha de Registro:</div>
+                                <div class="detail-value">18/08/2023</div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">ID del registro:</div>
+                                <div class="detail-value">315</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="view-more">Ver Más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="language-selector">
+        <div class="language-btn">
+            <svg viewBox="0 0 24 24" width="14" height="14">
+                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/>
+            </svg>
+        </div>
+        <div class="language-btn">
+            <svg viewBox="0 0 24 24" width="14" height="14">
+                <path d="M17 9h-3.5v5.5h3.5V9zm0-1c.55 0 1 .45 1 1v5.5c0 .55-.45 1-1 1H13.5c-.55 0-1-.45-1-1V9c0-.55.45-1 1-1H17zm-10 1v1h3v1.5h-2c-.55 0-1 .45-1 1V14c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-1H9v-1.5h2c.55 0 1-.45 1-1V10c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z"/>
+            </svg>
+        </div>
+        <div class="language-btn">
+            <svg viewBox="0 0 24 24" width="14" height="14">
+                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+            </svg>
+        </div>
+    </div>
+</body>
+</html>
