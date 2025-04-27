@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipalidad Provincial de Ferreñafe - Registro Vehicular</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="header">
+        <!-- Logo -->
+        <div class="logo">
+          <img src="assets/logo.png" alt="Logo">
+        </div>
+
+        <div class="dropdown-wrapper">
+            <!-- Botón disparador -->
+            <button class="dropdown-trigger" aria-label="Abrir menú de usuario">
+              <img src="assets/user.svg" alt="Cuenta">
+            </button>
+
+            <!-- Menú desplegable -->
+            <div class="dropdown-menu">
+              <div class="dropdown-content">
+                <div class="user-info">
+                  <img src="assets/user.svg" alt="">
+                  <h2>Alexis Ballona</h2>
+                </div>
+                <hr>
+                <div class="menu-options">
+                  <div>
+                    <img src="assets/podcaster-46.svg" alt="">
+                    <p>Enviar Comentarios</p>
+                  </div>
+                  <div>
+                    <img src="assets/podcaster-46.svg" alt="">
+                    <p>Configuración</p>
+                  </div>
+                  <div>
+                    <img src="assets/podcaster-46.svg" alt="">
+                    <p>Editar</p>
+                  </div>
+                  <div>
+                    <img src="assets/podcaster-46.svg" alt="">
+                    <p>Cerrar sesión</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    </header>
+  </div>
+  <img src="assets/logo.png">
+  <script>
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const menu = document.querySelector('.dropdown-menu');
+
+    dropdownTrigger.addEventListener('click', () => {
+        menu.classList.toggle('open-menu');
+    });
+
+  </script>
+</body>
+</html>
